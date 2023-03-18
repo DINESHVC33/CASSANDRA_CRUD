@@ -11,10 +11,10 @@ To create a table in Cassandra, you can use the CREATE TABLE statement. The gene
 
 
 
-  CREATE TABLE table_name (
-   column1 datatype,
-   column2 datatype,
-   column3 datatype,
-   ...
-   PRIMARY KEY (one_or_more_columns)
-);
+                  CREATE TABLE table_name (
+                    column1 datatype,
+                    column2 datatype,
+                    column3 datatype,
+                    ...
+                    PRIMARY KEY (one_or_more_columns)
+                       );
