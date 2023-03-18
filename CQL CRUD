@@ -1,0 +1,159 @@
+Connected as dineshvc12062003@gmail.com.
+Connected to cndb at cassandra.ingress:9042.
+[cqlsh 6.8.0 | Cassandra 4.0.0.6816 | CQL spec 3.4.5 | Native protocol v4 | TLS]
+Use HELP for help.
+token@cqlsh> desc Keyspaces;
+
+system_auth    "columnfamily"  data_endpoint_auth   
+system_schema  system_traces   system_virtual_schema
+system         datastax_sla    system_views  
+    
+token@cqlsh> USE "columnfamily";
+
+
+token@cqlsh:columnfamily> CREATE TABLE students (
+                ...    roll_no INT PRIMARY KEY,
+                ...    name TEXT,
+                ...    age INT,
+                ...    dep TEXT,
+                ...    email TEXT,
+                ...    phone TEXT,
+                ...    cgpa FLOAT
+                ... );
+
+token@cqlsh:columnfamily> INSERT INTO students (roll_no, name, age, dep, email, phone, cgpa) 
+                ... VALUES 
+                ...   (1, 'Anbu', 20, 'IT', 'anbu@gmail.com', '9645122515',9.2)
+                ... ;
+token@cqlsh:columnfamily> INSERT INTO students (roll_no, name, age, dep, email, phone, cgpa) 
+                ... VALUES 
+                ...   (2, 'Anto', 22, 'IT', 'anto@gmail.com', '9645122587',8.5);
+token@cqlsh:columnfamily> INSERT INTO students (roll_no, name, age, dep, email, phone, cgpa) 
+                ... VALUES 
+                ...   (3, ' Bala', 19,'IT', 'bala@gmail.com', '7545122515',8.9);
+token@cqlsh:columnfamily> INSERT INTO students (roll_no, name, age, dep, email, phone, cgpa) 
+                ... VALUES 
+                ...   (4, 'Dinesh', 19,'IT', 'dinesh@gmail.com', '9665122515',9.1);
+token@cqlsh:columnfamily> INSERT INTO students (roll_no, name, age, dep, email, phone, cgpa) 
+                ... VALUES 
+                ...   (5, 'Harish', 22, 'IT', 'harish@gmail.com', '9645452587',8.8);
+token@cqlsh:columnfamily> SELECT * FROM students;
+
+ roll_no | age | cgpa | dep | email            | name   | phone
+---------+-----+------+-----+------------------+--------+------------
+       5 |  22 |  8.8 |  IT | harish@gmail.com | Harish | 9645452587
+       1 |  20 |  9.2 |  IT |   anbu@gmail.com |   Anbu | 9645122515
+       2 |  22 |  8.5 |  IT |   anto@gmail.com |   Anto | 9645122587
+       4 |  19 |  9.1 |  IT | dinesh@gmail.com | Dinesh | 9665122515
+       3 |  19 |  8.9 |  IT |   bala@gmail.com |   Bala | 7545122515
+
+(5 rows)
+
+
+
+token@cqlsh:columnfamily> CREATE TABLE faculty (
+                ...    f_id INT PRIMARY KEY,
+                ...    name TEXT,
+                ...    age INT,
+                ...    dep TEXT,
+                ...    email TEXT,
+                ...    phone TEXT,
+                ...    ex_year INT
+                ... );
+
+
+token@cqlsh:columnfamily> INSERT INTO faculty ( f_id, name, age, dep, email, phone,ex_year) 
+                ... VALUES 
+                ...   (1, 'ATHAVAN', 32, 'IT', 'athavan@gmail.com', '9645452587',8);
+token@cqlsh:columnfamily> INSERT INTO faculty ( f_id, name, age, dep, email, phone,ex_year) 
+                ... VALUES 
+                ...   (2, 'ARYA', 32, 'IT', 'athavan@gmail.com', '9645452587',8);
+token@cqlsh:columnfamily> INSERT INTO faculty ( f_id, name, age, dep, email, phone,ex_year) 
+                ... VALUES 
+                ...  (3, 'DRAVID', 35, 'IT', 'dravid@gmail.com', '7845452111',6);
+token@cqlsh:columnfamily> INSERT INTO faculty ( f_id, name, age, dep, email, phone,ex_year) 
+                ... VALUES 
+                ... (4, 'MOHAN', 28, 'IT', 'mohan@gmail.com', '9255652587',2);
+token@cqlsh:columnfamily> INSERT INTO faculty ( f_id, name, age, dep, email, phone,ex_year) 
+                ... VALUES 
+                ... (5, 'PRIYA', 27, 'IT', 'priya@gmail.com', '9115400251',2);
+token@cqlsh:columnfamily> SELECT * FROM faculty;
+
+ f_id | age | dep | email             | ex_year | name    | phone
+------+-----+-----+-------------------+---------+---------+------------
+    5 |  27 |  IT |   priya@gmail.com |       2 |   PRIYA | 9115400251
+    1 |  32 |  IT | athavan@gmail.com |       8 | ATHAVAN | 9645452587
+    2 |  32 |  IT | athavan@gmail.com |       8 |    ARYA | 9645452587
+    4 |  28 |  IT |   mohan@gmail.com |       2 |   MOHAN | 9255652587
+    3 |  35 |  IT |  dravid@gmail.com |       6 |  DRAVID | 7845452111
+
+(5 rows)
+token@cqlsh:columnfamily> SELECT * FROM students;
+
+ roll_no | age | cgpa | dep | email            | name   | phone
+---------+-----+------+-----+------------------+--------+------------
+       5 |  22 |  8.8 |  IT | harish@gmail.com | Harish | 9645452587
+       1 |  20 |  9.2 |  IT |   anbu@gmail.com |   Anbu | 9645122515
+       2 |  22 |  8.5 |  IT |   anto@gmail.com |   Anto | 9645122587
+       4 |  19 |  9.1 |  IT | dinesh@gmail.com | Dinesh | 9665122515
+       3 |  19 |  8.9 |  IT |   bala@gmail.com |   Bala | 7545122515
+
+(5 rows)
+
+token@cqlsh:columnfamily> SELECT * FROM students WHERE roll_no = 4 ;
+
+ roll_no | age | cgpa | dep | email            | name   | phone
+---------+-----+------+-----+------------------+--------+------------
+       4 |  19 |  9.1 |  IT | dinesh@gmail.com | Dinesh | 9665122515
+
+(1 rows)
+token@cqlsh:columnfamily> UPDATE students SET email ='dinesh123@example.com' WHERE roll_no = 4;token@cqlsh:columnfamily> SELECT * FROM students;
+
+ roll_no | age | cgpa | dep | email                 | name   | phone
+---------+-----+------+-----+-----------------------+--------+------------
+       5 |  22 |  8.8 |  IT |      harish@gmail.com | Harish | 9645452587
+       1 |  20 |  9.2 |  IT |        anbu@gmail.com |   Anbu | 9645122515
+       2 |  22 |  8.5 |  IT |        anto@gmail.com |   Anto | 9645122587
+       4 |  19 |  9.1 |  IT | dinesh123@example.com | Dinesh | 9665122515
+       3 |  19 |  8.9 |  IT |        bala@gmail.com |   Bala | 7545122515
+
+(5 rows)
+token@cqlsh:columnfamily> SELECT * FROM faculty ;
+
+ f_id | age | dep | email             | ex_year | name    | phone
+------+-----+-----+-------------------+---------+---------+------------
+    5 |  27 |  IT |   priya@gmail.com |       2 |   PRIYA | 9115400251
+    1 |  32 |  IT | athavan@gmail.com |       8 | ATHAVAN | 9645452587
+    2 |  32 |  IT | athavan@gmail.com |       8 |    ARYA | 9645452587
+    4 |  28 |  IT |   mohan@gmail.com |       2 |   MOHAN | 9255652587
+    3 |  35 |  IT |  dravid@gmail.com |       6 |  DRAVID | 7845452111
+
+(5 rows)
+
+token@cqlsh:columnfamily> UPDATE faculty SET email ='arya@example.com' WHERE f_id = 2;
+token@cqlsh:columnfamily> SELECT * FROM faculty;
+
+ f_id | age | dep | email             | ex_year | name    | phone
+------+-----+-----+-------------------+---------+---------+------------
+    5 |  27 |  IT |   priya@gmail.com |       2 |   PRIYA | 9115400251
+    1 |  32 |  IT | athavan@gmail.com |       8 | ATHAVAN | 9645452587
+    2 |  32 |  IT |  arya@example.com |       8 |    ARYA | 9645452587
+    4 |  28 |  IT |   mohan@gmail.com |       2 |   MOHAN | 9255652587
+    3 |  35 |  IT |  dravid@gmail.com |       6 |  DRAVID | 7845452111
+
+(5 rows)
+token@cqlsh:columnfamily> DELETE FROM faculty WHERE f_id = 1;
+token@cqlsh:columnfamily> SELECT * FROM faculty;
+
+ f_id | age | dep | email            | ex_year | name   | phone
+------+-----+-----+------------------+---------+--------+------------
+    5 |  27 |  IT |  priya@gmail.com |       2 |  PRIYA | 9115400251
+    2 |  32 |  IT | arya@example.com |       8 |   ARYA | 9645452587
+    4 |  28 |  IT |  mohan@gmail.com |       2 |  MOHAN | 9255652587
+    3 |  35 |  IT | dravid@gmail.com |       6 | DRAVID | 7845452111
+
+(4 rows)
+token@cqlsh:columnfamily> DROP TABLE faculty;
+token@cqlsh:columnfamily> SELECT * FROM faculty;
+InvalidRequest: Error from server: code=2200 [Invalid query] message="table columnfamily.faculty does not exist"
+token@cqlsh:columnfamily> 
